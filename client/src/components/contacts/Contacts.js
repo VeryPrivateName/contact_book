@@ -10,7 +10,7 @@ const Contacts = () => {
   return (
     <Fragment>
       {contacts.map(contact => (
-        <ContactItem key={contact.id} contact={contacts} />
+        <ContactItem key={contact.id} contact={contact} />
       ))}
     </Fragment>
   );
