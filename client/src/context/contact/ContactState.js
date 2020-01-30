@@ -32,11 +32,12 @@ const ContactState = props => {
       {
         id: 3,
         name: 'John3 Doe3',
-        email: 'John1Doe1@gmail.com',
+        email: 'John3Doe3@gmail.com',
         phone: '33333-3333-3333-3333',
         type: 'professional'
       }
-    ]
+    ],
+    current: null
   };
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
@@ -56,9 +57,21 @@ const ContactState = props => {
 
   // Set current contact
 
+  const setCurrent = contact => {
+    dispatch({ type: SET_CURRENT, payload: contact });
+  };
+
   // Clear current contact
 
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+
   // Update contact
+
+  const updateContact = contact => {
+    dispatch({ type: UPDATE_CONTACT, payload: contact });
+  };
 
   // Filter contacts
 
@@ -68,8 +81,12 @@ const ContactState = props => {
     <ContactContext.Provider
       value={{
         contacts: state.contacts,
+        current: state.current,
         addContact,
-        deleteContact //providing function to this component
+        deleteContact, //providing function to this component
+        setCurrent,
+        clearCurrent,
+        updateContact
       }}
     >
       {props.children}
