@@ -1,10 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
 
 const Register = () => {
   const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
+  const { register, error, clearErrors } = authContext;
+
+  useEffect(() => {
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+  }, [setAlert, clearErrors, error]); // adding values as a dependency to useEffect
 
   const [user, setUser] = useState({
     name: '',
@@ -24,7 +34,11 @@ const Register = () => {
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      console.log('Register submit');
+      register({
+        name,
+        email,
+        password
+      });
     }
   };
 
@@ -42,7 +56,7 @@ const Register = () => {
             name='name'
             value={name}
             onChange={onChange}
-            // required // this enough versus all alerts
+            // required // this enough versus all alerts/alertState/alertReducert etc.
           />
         </div>
         <div className='form-group'>
@@ -53,7 +67,7 @@ const Register = () => {
             name='email'
             value={email}
             onChange={onChange}
-            // required // this enough versus all alerts
+            // required // this enough versus all alerts alerts/alertState/alertReducert etc.
           />
         </div>
         <div className='form-group'>
@@ -64,7 +78,7 @@ const Register = () => {
             name='password'
             value={password}
             onChange={onChange}
-            // required // this enough versus all alerts
+            // required // this enough versus all alerts alerts/alertState/alertReducert etc.
             // minLength='6'// this enough versus all alerts
           />
         </div>
@@ -76,7 +90,7 @@ const Register = () => {
             name='password2'
             value={password2}
             onChange={onChange}
-            // required // this enough versus all alerts
+            // required // this enough versus all alerts alerts/alertState/alertReducert etc.
             // minLength='6'// this enough versus all alerts
           />
         </div>

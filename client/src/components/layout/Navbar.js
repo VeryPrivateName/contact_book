@@ -32,7 +32,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'The Contact Keeper',
+  title: 'Contact Book',
   icon: 'far fa-address-book'
 };
 
