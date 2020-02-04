@@ -20,13 +20,13 @@ const Contacts = () => {
             filtered.map((
               contact //  for each filtered contact load/show filtered contact
             ) => (
-              <CSSTransition key={contact.id} timeout={500} classNames='item'>
+              <CSSTransition key={contact._id} timeout={500} classNames='item'>
                 <ContactItem contact={contact} />
               </CSSTransition>
             ))
           : //else filtered Is null, show contacts
             contacts.map(contact => (
-              <CSSTransition key={contact.id} timeout={500} classNames='item'>
+              <CSSTransition key={contact._id} timeout={500} classNames='item'>
                 <ContactItem contact={contact} />
               </CSSTransition>
             ))}
